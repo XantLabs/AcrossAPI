@@ -31,6 +31,32 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Database
 db = SQLAlchemy(app)
 
+# Models
+
+
+class Photo(db.Model):
+    """Photo table."""
+
+    id = db.Column(db.BigInteger, primary_key=True)
+
+    uploadedTime = db.Column(db.DateTime, nullable=False)
+
+    caption = db.Column(db.Text(convert_unicode=True), default="")
+    language = db.Column(db.VARCHAR(10), nullable=False)
+
+    views = db.Column(db.Integer, default=0, nullable=False)
+
+    active = db.Column(db.Boolean, default=True, nullable=False)
+
+    fileName = db.Column(db.Text(convert_unicode=True), nullable=False)
+
+    lat = db.Column(db.Float, nullable=False)
+    lon = db.Column(db.Float, nullable=False)
+
+    likes = db.Column(db.Integer, default=0, nullable=False)
+    dislikes = db.Column(db.Integer, default=0, nullable=False)
+
+
 # Functions
 
 # Weighting for heuristic. Should add to 1.0
@@ -78,6 +104,7 @@ def percentifyList(imageList):
 def epoch_seconds(date):
     """Return time distance from date and epoch."""
     td = date - epoch
+
     return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
 
 
@@ -118,6 +145,10 @@ def getTopN(n, userLat, userLon):
                                         float(row['lat']), float(row['lon']))
         image['likeScore'] = weighLikes(row['likes'], row['dislikes'])
         imageList.append(image)
+
+        # Also, change views += 1.
+        row.views += 1
+        db.session.commit()
 
     # Put the image list through all functions until end heuristic is found.
     unsortedImages = addHeuristic(percentifyList(imageList))
@@ -196,6 +227,32 @@ def sendTopPhotos():
     return getTopN(n, userLat, userLon)
 
 
+@app.route('/api/upvote/<filename>', methods=["POST"])
+def upvote():
+    """Apply exactly one upvote for a photo."""
+    apikey = request.form['apikey']
+
+    if not checkApiKey(apikey):
+        return "Forbidden: API key not in list.", 403
+
+    f = Photo.query.filter_by(fileName=filename).first()
+    f.upvotes += 1
+    db.session.commit()
+
+
+@app.route('/api/downvote/<filename>', methods=["POST"])
+def downvote(filename):
+    """Apply exactly one downvote for a photo."""
+    apikey = request.form['apikey']
+
+    if not checkApiKey(apikey):
+        return "Forbidden: API key not in list.", 403
+
+    f = Photo.query.filter_by(fileName=filename).first()
+    f.downvotes += 1
+    db.session.commit()
+
+
 @app.errorhandler(403)
 def fourOhThree(e):
     """Provide standardised string error message as response."""
@@ -220,29 +277,6 @@ def fiveHundred(e):
     return "Internal server error. One of our devs messed up.", 500
 
 # Other views are located in views.py.
-
-
-class Photo(db.Model):
-    """Photo table."""
-
-    id = db.Column(db.BigInteger, primary_key=True)
-
-    uploadedTime = db.Column(db.DateTime, nullable=False)
-
-    caption = db.Column(db.Text(convert_unicode=True))
-    language = db.Column(db.VARCHAR(10), nullable=False)
-
-    views = db.Column(db.Integer, default=0, nullable=False)
-
-    active = db.Column(db.Boolean, default=True, nullable=False)
-
-    fileName = db.Column(db.Text(convert_unicode=True), nullable=False)
-
-    lat = db.Column(db.Float, nullable=False)
-    lon = db.Column(db.Float, nullable=False)
-
-    likes = db.Column(db.Integer, default=0, nullable=False)
-    dislikes = db.Column(db.Integer, default=0, nullable=False)
 
 
 db.create_all()

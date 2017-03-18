@@ -1,5 +1,5 @@
-# BackendApp
-Backend of the Codebrew 2017 application
+# AcrossBackend
+Backend of the Codebrew 2017 application, WebSockets API
 
 ## Requirements
 
@@ -51,6 +51,13 @@ HTTP GET http://<SOME_IP>/api/photo_list
 'apikey': App's api key,
 'userLat': User's latitude,
 'userLon': User's longitude,
+```
+
+You can send upvotes and downvotes with a correct API key:
+
+```
+HTTP POST http://<SOME_IP>/api/[up/down]vote/<filename>,
+'apikey': App's api key,
 ```
 
 Finally, you can get an image directly from below. Note that you do not need an API key for this operation. Rate limiting still applies.
