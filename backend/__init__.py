@@ -208,7 +208,7 @@ def upload():
         "is correct."
 
 
-@app.route('/api/media/<filename>', methods=["POST"])
+@app.route('/api/media/<filename>', methods=["GET"])
 def uploadedFile(filename):
     """Show an uploaded file."""
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
