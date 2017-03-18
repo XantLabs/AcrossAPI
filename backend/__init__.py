@@ -142,7 +142,7 @@ def getTopN(n, userLat, userLon):
     # Generate distance for everything in the list. Make image list.
     for row in result:
         image = row
-        image['distance'] = getDistance(userLat, userLong,
+        image['distance'] = getDistance(userLat, userLon,
                                         float(row['lat']), float(row['lon']))
         image['likeScore'] = weighLikes(row['likes'], row['dislikes'])
         imageList.append(image)
@@ -160,7 +160,7 @@ def getTopN(n, userLat, userLon):
     if len(sortedFull) > n:
         sortedFull = sortedFull[:n]
 
-    return [{'img': i['url'], 'id': i['id']} for i in sortedFull]
+    return str([{'img': i['url'], 'id': i['id']} for i in sortedFull])
 
 
 # Views
