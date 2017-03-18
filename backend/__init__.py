@@ -2,6 +2,7 @@
 
 import url
 import secure
+import models
 
 from flask import Flask
 from utils.generalutils import urlify
@@ -24,8 +25,9 @@ urlify(app, url.URLS)
 # Set config vars.
 UPLOAD_FOLDER = 'media'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' +\
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + \
     'root@localhost/swagswag'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database
 db = SQLAlchemy(app)

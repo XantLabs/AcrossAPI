@@ -21,8 +21,8 @@ def upload():
         return "Forbidden: cannot upload file with no filename.", 403
 
     # If the file is allowed, continue. If not, return 403.
-    if file and allowed_file(file.filename) and
-    checkApiKey(str(request.form['apikey']).rstrip()):
+    if file and allowed_file(file.filename) and checkApiKey(
+            str(request.form['apikey']).rstrip()):
         filename = hashFile(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
