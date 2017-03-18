@@ -194,6 +194,8 @@ def upload():
                          language=lang, views=0, active=True, fileName=fn,
                          lat=lat1, lon=lon1, likes=0, dislikes=0)
 
+        print(newPhoto)
+
         db.session.add(newPhoto)
         db.session.commit()
 
