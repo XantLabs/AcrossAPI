@@ -1,7 +1,8 @@
 """Main init file. File does not need to be edited except for server edits."""
 
-import url
+from url import URLS
 import secure
+import models
 
 from flask import Flask
 from utils.generalutils import urlify
@@ -19,22 +20,19 @@ limiter = Limiter(
 )
 
 # Set URLs to views
-urlify(app, url.URLS)
+urlify(app, URLS)
+# Just for debug:
+# import views
+# app.add_url_rule('/test', view_func=views.test, methods=["GET"])
 
 # Set config vars.
 UPLOAD_FOLDER = 'media'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' +\
-    'root@localhost/swagswag'
+app.config['SQLALCHEMY_DATABASE_URI'] = secure.DATABASE
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database
 db = SQLAlchemy(app)
-
-# Social authentication information
-app.config['SOCIAL_FACEBOOK'] = {
-    'consumer_key': secure.APP_ID,
-    'consumer_secret': secure.APP_SECRET
-}
 
 # Custom error handlers
 

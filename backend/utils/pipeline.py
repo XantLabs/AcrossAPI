@@ -3,6 +3,8 @@
 import math
 from datetime import datetime, timedelta
 
+from models import Photo, db
+
 # Weighting for heuristic. Should add to 1.0
 DISTANCE_IMPORTANCE = 0.2
 LIKES_IMPORTANCE = 0.45
@@ -46,7 +48,7 @@ def percentifyList(imageList):
 
 
 def epoch_seconds(date):
-    """Returns time distance from date and epoch."""
+    """Return time distance from date and epoch."""
     td = date - epoch
     return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
 
@@ -78,7 +80,7 @@ def addHeuristic(imageList):
 
 def getTopN(conn, imageList, n, userLat, userLong):
     """Get top N images according to our heuristic."""
-    result = conn.execute("SELECT * FROM Images WHERE Active == TRUE")
+    result = Photo.query.filter_by(active=True).all()
     imageList = list()
 
     # Generate distance for everything in the list. Make image list.
@@ -93,6 +95,9 @@ def getTopN(conn, imageList, n, userLat, userLong):
     unsortedImages = addHeuristic(percentifyList(imageList))
 
     sortedFull = sorted(unsortedImages, key=lambda i: i['heuristic'],
-                        reversed=True)[:n]
+                        reversed=True)
 
-    return [i['url'] for i in sortedFull]
+    if len(sortedFull) > n:
+        sortedFull = sortedFull[:n]
+
+    return [{'img': i['url'], 'id': i['id']} for i in sortedFull]
