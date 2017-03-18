@@ -146,6 +146,7 @@ def getTopN(n, userLat, userLon):
     for row in result:
         image = dict()
         image['views'] = row.views
+        image['url'] = row.fileName
         image['distance'] = getDistance(float(userLat), float(userLon),
                                         float(row.lat),
                                         float(row.lon))
@@ -166,7 +167,7 @@ def getTopN(n, userLat, userLon):
     if len(sortedFull) > int(n):
         sortedFull = sortedFull[:int(n)]
 
-    return str([{'img': i['url'], 'id': i['id']} for i in sortedFull])
+    return str([i['url'] for i in sortedFull])
 
 
 # Views
