@@ -38,16 +38,19 @@ HTTP POST http://<SOME_IP>/api/upload
 'file': File,
 'lat': User's Latitude,
 'lon': User's longitude,
-'caption': User inputted caption (not required),
-'language': User's language (from phone),
-'apikey': App's api key.
+'caption': User inputted caption (defaults to empty string),
+'language': User's language (from device),
+'apikey': App's api key,
 ```
 
 You can request a list of n photo objects with:
 
 ```
-HTTP GET http://<SOME_IP>/
-
+HTTP GET http://<SOME_IP>/api/photo_list
+'n': Length of photo list,
+'apikey': App's api key,
+'userLat': User's latitude,
+'userLon': User's longitude,
 ```
 
 Finally, you can get an image directly from below. Note that you do not need an API key for this operation. Rate limiting still applies.
