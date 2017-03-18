@@ -164,7 +164,7 @@ def getTopN(n, userLat, userLon):
                         reverse=True)
 
     if len(sortedFull) > int(n):
-        sortedFull = sortedFull[:n]
+        sortedFull = sortedFull[:int(n)]
 
     return str([{'img': i['url'], 'id': i['id']} for i in sortedFull])
 
