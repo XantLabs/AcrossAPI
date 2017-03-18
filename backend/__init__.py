@@ -250,7 +250,7 @@ def upvote(filename):
         return "Forbidden: API key not in list."
 
     f = Photo.query.filter_by(fileName=filename).first()
-    f.upvotes += 1
+    f.likes += 1
     db.session.commit()
 
 
@@ -263,7 +263,7 @@ def downvote(filename):
         return "Forbidden: API key not in list."
 
     f = Photo.query.filter_by(fileName=filename).first()
-    f.downvotes += 1
+    f.dislikes += 1
     db.session.commit()
 
 
