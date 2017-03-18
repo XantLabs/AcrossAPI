@@ -167,7 +167,7 @@ def getTopN(n, userLat, userLon):
     if len(sortedFull) > int(n):
         sortedFull = sortedFull[:int(n)]
 
-    return str([i['url'] for i in sortedFull])
+    return [i['url'] for i in sortedFull]
 
 
 # Views
