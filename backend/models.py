@@ -13,6 +13,8 @@ Base = declarative_base()
 
 
 class Photo(Base):
+    """Photo table."""
+
     __tablename__ = 'photo'
 
     id = Column(BigInteger, primary_key=True)
@@ -33,7 +35,10 @@ class Photo(Base):
 
 
 class User(Base):
+    """User table, handles auth."""
+
     __tablename__ = 'user'
+
     id = Column(Integer, primary_key=True)
     language = Column(VARCHAR(10), nullable=False)
     viewed = relationship(
@@ -43,7 +48,10 @@ class User(Base):
 
 
 class UserViewedPhoto(Base):
+    """Middleman table for M2M relationships for viewed photos."""
+
     __tablename__ = 'user_viewed_photo'
+
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     photo_id = Column(BigInteger, ForeignKey('photo.id'), primary_key=True)
 

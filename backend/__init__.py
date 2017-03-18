@@ -38,7 +38,7 @@ app.config['SOCIAL_FACEBOOK'] = {
 @app.errorhandler(403)
 def fourOhThree(e):
     """Provide standardised string error message as response."""
-    return "Access denied. Insufficient permissions.", 403
+    return "Access denied. Insufficient permissions for request.", 403
 
 
 @app.errorhandler(404)
@@ -50,12 +50,12 @@ def fourOhFour(e):
 @app.errorhandler(410)
 def fourTen(e):
     """Provide standardised string error message as response."""
-    return "The file was here before, but now it's gone.", 410
+    return "Not found. The file was here before, but now it's gone.", 410
 
 
 @app.errorhandler(500)
 def fiveHundred(e):
     """Provide standardised string error message as response."""
-    return "Internal server error. Some dev messed up.", 500
+    return "Internal server error. One of our devs messed up.", 500
 
 # Other views are located in views.py.
