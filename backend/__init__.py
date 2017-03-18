@@ -168,8 +168,13 @@ def getTopN(n, userLat, userLon):
     if len(sortedFull) > int(n):
         sortedFull = sortedFull[:int(n)]
 
-    return jsonify({'images': [{'img': i['url'],
-                                'caption': i['caption']} for i in sortedFull]})
+    data = list()
+
+    for i in sortedFull:
+        dict1 = {'img': i['url'], 'caption': i['caption']}
+        data.append(dict1)
+
+    return jsonify(data)
 
 
 # Views
