@@ -191,15 +191,21 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))
 
         # Upload renamed file to database.
-        newPhoto = Photo(uploadedTime=datetime.utcnow,
-                         caption=capt.encode('utf-8'),
-                         language=lang.encode('utf-8'),
-                         views=0, active=True,
-                         fileName=fn.encode('utf-8'),
-                         lat=lat1, lon=lon1,
-                         likes=0, dislikes=0)
+        # newPhoto = Photo(uploadedTime=datetime.utcnow,
+        #                  caption=capt.encode('utf-8'),
+        #                  language=lang.encode('utf-8'),
+        #                  views=0, active=True,
+        #                  fileName=fn.encode('utf-8'),
+        #                  lat=lat1, lon=lon1,
+        #                  likes=0, dislikes=0)
 
-        print(newPhoto)
+        newPhoto = Photo(uploadedTime=datetime.utcnow,
+                         caption="test",
+                         language="en-US",
+                         views=0, active=True,
+                         fileName="test.png",
+                         lat=100, lon=-100,
+                         likes=0, dislikes=0)
 
         db.session.add(newPhoto)
         db.session.commit()
@@ -284,8 +290,6 @@ def fourTen(e):
 def fiveHundred(e):
     """Provide standardised string error message as response."""
     return "Internal server error. One of our devs messed up.", 500
-
-# Other views are located in views.py.
 
 
 db.create_all()

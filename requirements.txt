@@ -1,5 +1,5 @@
 flask
 Flask-Limiter
 Flask-SQLAlchemy
-mysql-python
+pymysql
 celery
