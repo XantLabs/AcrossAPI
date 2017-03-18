@@ -253,7 +253,7 @@ def upvote(filename):
     f.likes += 1
     db.session.commit()
 
-    return f.likes
+    return str(f.likes)
 
 
 @app.route('/api/downvote/<filename>', methods=["POST"])
@@ -268,7 +268,7 @@ def downvote(filename):
     f.dislikes += 1
     db.session.commit()
 
-    return f.dislikes
+    return str(f.dislikes)
 
 
 @app.errorhandler(403)
