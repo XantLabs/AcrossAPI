@@ -42,14 +42,14 @@ class Photo(db.Model):
 
     uploadedTime = db.Column(db.DateTime, nullable=False)
 
-    caption = db.Column(db.Text(convert_unicode=True), default="")
+    caption = db.Column(db.Text(), default="")
     language = db.Column(db.VARCHAR(10), nullable=False)
 
     views = db.Column(db.Integer, default=0, nullable=False)
 
     active = db.Column(db.Boolean, default=True, nullable=False)
 
-    fileName = db.Column(db.Text(convert_unicode=True), nullable=False)
+    fileName = db.Column(db.Text(), nullable=False)
 
     lat = db.Column(db.Float, nullable=False)
     lon = db.Column(db.Float, nullable=False)
