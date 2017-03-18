@@ -163,7 +163,7 @@ def getTopN(n, userLat, userLon):
     sortedFull = sorted(unsortedImages, key=lambda i: i['heuristic'],
                         reverse=True)
 
-    if len(sortedFull) > ing(n):
+    if len(sortedFull) > int(n):
         sortedFull = sortedFull[:n]
 
     return str([{'img': i['url'], 'id': i['id']} for i in sortedFull])
