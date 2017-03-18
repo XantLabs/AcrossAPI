@@ -42,7 +42,7 @@ class Photo(db.Model):
 
     uploadedTime = db.Column(db.DateTime, nullable=False)
 
-    caption = db.Column(db.Text(convert_unicode=True), default="")
+    caption = db.Column(db.NVARCHAR(144), default="")
     language = db.Column(db.VARCHAR(10), nullable=False)
 
     views = db.Column(db.Integer, default=0, nullable=False)
