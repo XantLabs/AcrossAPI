@@ -202,7 +202,7 @@ def upload():
         db.session.add(newPhoto)
         db.session.commit()
 
-        return url_for('uploaded_file', filename=fn)
+        return url_for('uploadedFile', filename=fn)
 
     return "Forbidden: ensure the file extension is allowed and API key " + \
         "is correct."
