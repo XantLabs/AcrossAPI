@@ -1,6 +1,6 @@
-"""Main init file."""
+"""Main init file. File does not need to be edited except for server edits."""
 
-import views
+import url
 
 from flask import Flask
 from utils.generalutils import urlify
@@ -15,14 +15,7 @@ limiter = Limiter(
     global_limits=["10000 per hour"]
 )
 
-# Map URLs to view functions. Allows more modular code.
-URLS = [
-    ('/', views.index),
-]
-
-urlify(app, URLS)
-
-# Custom error handlers.
+urlify(app, url.URLS)
 
 
 @app.errorhandler(403)
@@ -47,3 +40,5 @@ def fourTen(e):
 def fiveHundred(e):
     """Provide standardised string error message as response."""
     return "Internal server error. Some dev messed up.", 500
+
+# Other views are located in views.py.
