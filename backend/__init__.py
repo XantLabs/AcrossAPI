@@ -191,7 +191,7 @@ def upload():
 
         # Upload renamed file to database.
         newPhoto = Photo(uploadedTime=datetime.utcnow, caption=capt,
-                         language=lang, views=0, active=True, filename=fn,
+                         language=lang, views=0, active=True, fileName=fn,
                          lat=lat1, lon=lon1, likes=0, dislikes=0)
 
         db.session.add(newPhoto)
