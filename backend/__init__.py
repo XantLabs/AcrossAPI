@@ -193,9 +193,10 @@ def upload():
         # Upload renamed file to database.
         newPhoto = Photo(uploadedTime=datetime.utcnow,
                          caption=capt.encode('utf-8'),
-                         language=lang.encode('utf-8'), views=0, active=True,
+                         language=lang.encode('utf-8'),
+                         views=0, active=True,
                          fileName=fn.encode('utf-8'),
-                         lat=lat1.encode('utf-8'), lon=lon1.encode('utf-8'),
+                         lat=lat1, lon=lon1,
                          likes=0, dislikes=0)
 
         print(newPhoto)
