@@ -11,7 +11,7 @@ APIKEY_FILE = "api.keys"
 
 
 def genRandomString():
-    """Generates a random string."""
+    """Generate a random string."""
     return ''.join(random.choice(string.ascii_lowercase) for i in range(10))
 
 

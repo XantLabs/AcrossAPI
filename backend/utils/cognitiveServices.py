@@ -86,6 +86,7 @@ def translate(caption, translateFrom, translateTo):
         # Request headers
         'Authorization': 'Bearer ' + auth,
     }
+
     try:
         url = "/v2/http.svc/Translate?%s"
         conn = http.client.HTTPSConnection('api.microsofttranslator.com')
@@ -94,7 +95,7 @@ def translate(caption, translateFrom, translateTo):
         response = conn.getresponse()
         data = str(response.read(), 'utf-8')
         data = data.partition('>')[-1].rpartition('<')[0]
-        return data
 
+        return data
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
