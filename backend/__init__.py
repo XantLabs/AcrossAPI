@@ -141,7 +141,6 @@ def getTopN(n, userLat, userLon):
 
     # Generate distance for everything in the list. Make image list.
     for row in result:
-        image = row
         image['distance'] = getDistance(float(userLat), float(userLon),
                                         float(row.lat),
                                         float(row.lon))
