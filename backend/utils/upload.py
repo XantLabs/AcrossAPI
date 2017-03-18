@@ -27,7 +27,6 @@ def allowed_file(filename):
 
 def checkApiKey(apikey):
     """Check if an api key provided is good."""
-    open(APIKEY_FILE, 'a').close()  # Touch file.
     with open(APIKEY_FILE, 'r') as f:
         for j in [str(i.rstrip()) for i in f.readlines()]:
             if j == apikey.rstrip():
