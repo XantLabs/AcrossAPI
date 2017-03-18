@@ -191,26 +191,18 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))
 
         # Upload renamed file to database.
-        # newPhoto = Photo(uploadedTime=datetime.utcnow,
-        #                  caption=capt.encode('utf-8'),
-        #                  language=lang.encode('utf-8'),
-        #                  views=0, active=True,
-        #                  fileName=fn.encode('utf-8'),
-        #                  lat=lat1, lon=lon1,
-        #                  likes=0, dislikes=0)
-
-        newPhoto = Photo(uploadedTime=datetime.utcnow(),
-                         caption="test",
-                         language="en-US",
+        newPhoto = Photo(uploadedTime=datetime.utcnow,
+                         caption=capt,
+                         language=lang,
                          views=0, active=True,
-                         fileName="test.png",
-                         lat=100, lon=-100,
+                         fileName=fn,
+                         lat=lat1, lon=lon1,
                          likes=0, dislikes=0)
 
         db.session.add(newPhoto)
         db.session.commit()
 
-        return url_for('uploaded_file', filename=filename)
+        return url_for('uploaded_file', filename=fn)
 
     return "Forbidden: ensure the file extension is allowed and API key " + \
         "is correct."
