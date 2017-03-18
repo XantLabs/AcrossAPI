@@ -4,6 +4,5 @@ import views
 
 # Note that all will be POST requests.
 URLS = [
-    ('/api/upload', views.upload),
     ('/media/<filename>', views.uploadedFile),
 ]
