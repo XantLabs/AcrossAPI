@@ -143,8 +143,9 @@ def getTopN(n, userLat, userLon):
     for row in result:
         image = row
         image['distance'] = getDistance(userLat, userLon,
-                                        float(row['lat']), float(row['lon']))
-        image['likeScore'] = weighLikes(row['likes'], row['dislikes'])
+                                        float(image['lat']),
+                                        float(image['lon']))
+        image['likeScore'] = weighLikes(image['likes'], image['dislikes'])
         imageList.append(image)
 
         # Also, change views += 1.
