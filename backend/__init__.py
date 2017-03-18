@@ -174,10 +174,10 @@ def standard():
 def upload():
     """Upload a file to the host. Return an error if it fails."""
     file = request.files['img']
-    caption = request.form['caption']
-    language = request.form['language']
-    lat = request.form['lat']
-    lon = request.form['lon']
+    capt = request.form['caption']
+    lang = request.form['language']
+    lat1 = request.form['lat']
+    lon1 = request.form['lon']
 
     # Filename must be nonempty to be valid.
     if file.filename == '':
@@ -186,12 +186,13 @@ def upload():
     # If the file is allowed, continue. If not, return 403.
     if file and allowed_file(file.filename) and checkApiKey(
             str(request.form['apikey']).rstrip()):
-        filename = hashFile(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        fn = hashFile(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))
 
         # Upload renamed file to database.
-        newPhoto = Photo(datetime.utcnow, caption, language, 0,
-                         filename, lat, lon, 0, 0)
+        newPhoto = Photo(uploadedTime=datetime.utcnow, caption=capt,
+                         language=lang, views=0, active=True, filename=fn,
+                         lat=lat1, lon=lon1, likes=0, dislikes=0)
 
         db.session.add(newPhoto)
         db.session.commit()
