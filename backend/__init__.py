@@ -161,7 +161,7 @@ def getTopN(n, userLat, userLon):
     unsortedImages = addHeuristic(percentifyList(imageList))
 
     sortedFull = sorted(unsortedImages, key=lambda i: i['heuristic'],
-                        reversed=True)
+                        reverse=True)
 
     if len(sortedFull) > n:
         sortedFull = sortedFull[:n]
