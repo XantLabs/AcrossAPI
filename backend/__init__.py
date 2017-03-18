@@ -97,9 +97,9 @@ def percentifyList(imageList):
         distanceSum += i['distance']
 
     for i in imageList:
-        i['uph'] = i['likeScore'] / likeScoreSum
-        i['viewh'] = 1.0 - (int(i['views']) / viewsSum)
-        i['disth'] = i['distance'] / distanceSum
+        i['uph'] = 100 * (i['likeScore'] / likeScoreSum)
+        i['viewh'] = 100 * (1.0 - (int(i['views']) / viewsSum))
+        i['disth'] = 100 * (i['distance'] / distanceSum)
 
     return imageList
 
@@ -122,6 +122,7 @@ def weighLikes(ups, downs, date):
     order = math.log(max(abs(s), 1), 10)
     sign = 1 if s > 0 else -1 if s < 0 else 0
     seconds = epoch_seconds(date) - 1134028003
+
     return round(sign * order + seconds / 45000, 7)
 
 
