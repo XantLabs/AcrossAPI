@@ -145,7 +145,8 @@ def getTopN(n, userLat, userLon):
         image['distance'] = getDistance(float(userLat), float(userLon),
                                         float(row.lat),
                                         float(row.lon))
-        image['likeScore'] = weighLikes(row.likes, row.dislikes)
+        image['likeScore'] = weighLikes(row.likes, row.dislikes,
+                                        row.uploadedTime)
         imageList.append(image)
 
         # Also, change views += 1.
