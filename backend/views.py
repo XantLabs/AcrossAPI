@@ -4,9 +4,6 @@ import os
 
 from flask import request, send_from_directory, url_for
 
-UPLOAD_FOLDER = 'media'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 
 def upload():
     """Upload a file to the host. Return an error if it fails."""

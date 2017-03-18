@@ -9,8 +9,6 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 # Run server and rate limit.
-
-
 app = Flask(__name__)
 DEBUG = True
 limiter = Limiter(
@@ -19,7 +17,12 @@ limiter = Limiter(
     global_limits=["10000 per hour"]
 )
 
+# Set URLs to views
 urlify(app, url.URLS)
+
+# Set config vars.
+UPLOAD_FOLDER = 'media'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Social authentication information
 

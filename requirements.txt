@@ -3,3 +3,4 @@ Flask-Limiter
 Flask-SQLAlchemy
 Flask-Security
 http://github.com/pythonforfacebook/facebook-sdk/tarball/master
+pymysql
