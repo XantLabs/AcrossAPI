@@ -97,9 +97,9 @@ def percentifyList(imageList):
         distanceSum += i['distance']
 
     for i in imageList:
-        i['uph'] = 100 * (i['likeScore'] / likeScoreSum)
-        i['viewh'] = 100 * (1.0 - (int(i['views']) / viewsSum))
-        i['disth'] = 100 * (i['distance'] / distanceSum)
+        i['uph'] = min(100 * (i['likeScore'] / likeScoreSum), 100)
+        i['viewh'] = min(100, 100 * (1.0 - (int(i['views']) / viewsSum)))
+        i['disth'] = min(100, 100 * (i['distance'] / distanceSum))
 
     return imageList
 
