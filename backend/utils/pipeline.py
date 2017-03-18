@@ -84,5 +84,7 @@ def getTopN(conn, imageList, n, userLat, userLong):
     # Put the image list through all functions until end heuristic is found.
     unsortedImages = addHeuristic(percentifyList(imageList))
 
-    return sorted(unsortedImages, key=lambda i: i['heuristic'],
-                  reversed=True)[:n]
+    sortedFull = sorted(unsortedImages, key=lambda i: i['heuristic'],
+                        reversed=True)[:n]
+
+    return [i['url'] for i in sortedFull]
