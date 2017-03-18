@@ -175,7 +175,7 @@ def upload():
     # Check if the post request has the file part.
     if 'file' not in request.files:
         return "Forbidden: file part must be included in HTTP POST " + \
-            "request.", 403
+            "request."
 
     file = request.files['file']
     caption = request.form['caption']
@@ -185,7 +185,7 @@ def upload():
 
     # Filename must be nonempty to be valid.
     if file.filename == '':
-        return "Forbidden: cannot upload file with no filename.", 403
+        return "Forbidden: cannot upload file with no filename."
 
     # If the file is allowed, continue. If not, return 403.
     if file and allowed_file(file.filename) and checkApiKey(
@@ -203,7 +203,7 @@ def upload():
         return url_for('uploaded_file', filename=filename)
 
     return "Forbidden: ensure the file extension is allowed and API key " + \
-        "is correct.", 403
+        "is correct."
 
 
 @app.route('/api/media/<filename>', methods=["POST"])
