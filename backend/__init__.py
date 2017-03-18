@@ -191,7 +191,7 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))
 
         # Upload renamed file to database.
-        newPhoto = Photo(uploadedTime=datetime.utcnow,
+        newPhoto = Photo(uploadedTime=datetime.utcnow(),
                          caption=capt,
                          language=lang,
                          views=0, active=True,
