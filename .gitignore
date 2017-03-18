@@ -1,7 +1,8 @@
 # Project defined ignores
 media/*
 !media/.gitkeep
-secure.py
+*/secure.py
+*/api.keys
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

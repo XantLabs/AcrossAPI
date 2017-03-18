@@ -18,6 +18,7 @@ $ source ./env/bin/activate
 (env) $ pip install -r requirements.txt
 (env) $ cd backend
 (env) $ mv secure.py.example secure.py
+(env) $ touch api.keys
 ```
 
 Then, edit/provide the information required in backend/secret.py. This file is not included in the repo so you must create it manually each time you clone.

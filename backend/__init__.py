@@ -5,6 +5,7 @@ import secure
 
 from flask import Flask
 from utils.generalutils import urlify
+from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -23,10 +24,13 @@ urlify(app, url.URLS)
 # Set config vars.
 UPLOAD_FOLDER = 'media'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' +\
+    'root@localhost/swagswag'
+
+# Database
+db = SQLAlchemy(app)
 
 # Social authentication information
-
-
 app.config['SOCIAL_FACEBOOK'] = {
     'consumer_key': secure.APP_ID,
     'consumer_secret': secure.APP_SECRET
