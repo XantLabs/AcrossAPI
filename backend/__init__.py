@@ -1,11 +1,15 @@
 """Main init file. File does not need to be edited except for server edits."""
 
 import url
+import secure
 
 from flask import Flask
 from utils.generalutils import urlify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+
+# Run server and rate limit.
+
 
 app = Flask(__name__)
 DEBUG = True
@@ -16,6 +20,16 @@ limiter = Limiter(
 )
 
 urlify(app, url.URLS)
+
+# Social authentication information
+
+
+app.config['SOCIAL_FACEBOOK'] = {
+    'consumer_key': secure.APP_ID,
+    'consumer_secret': secure.APP_SECRET
+}
+
+# Custom error handlers
 
 
 @app.errorhandler(403)
