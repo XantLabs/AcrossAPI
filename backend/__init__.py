@@ -88,7 +88,9 @@ def percentifyList(imageList):
     # e.g.: [{url, likesHeuristic, distanceInKm, views, ...}]
     #   to: [{url, likesPercentage, distancePercentage, viewsPercentage}, ...]
 
-    likeScoreSum, distanceSum, viewsSum = 0
+    likeScoreSum = 0
+    distanceSum = 0
+    viewsSum = 0
     for i in imageList:
         likeScoreSum += i['likeScore']
         viewsSum += int(i['views'])
