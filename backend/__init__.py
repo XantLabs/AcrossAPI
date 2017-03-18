@@ -177,7 +177,7 @@ def upload():
         return "Forbidden: file part must be included in HTTP POST " + \
             "request."
 
-    file = request.files['file']
+    file = request.files['img']
     caption = request.form['caption']
     language = request.form['language']
     lat = request.form['lat']
