@@ -1,11 +1,13 @@
 """Get tables from the database and apply heuristic to get list of photos."""
-
+from datetime import datetime, timedelta
 import math
 
 # Weighting for heuristic. Should add to 1.0
 DISTANCE_IMPORTANCE = 0.2
 LIKES_IMPORTANCE = 0.45
 VIEWS_IMPORTANCE = 0.35
+
+epoch = datetime(1970, 1, 1)
 
 
 def getDistance(lat1, long1, lat2, long2):
@@ -41,11 +43,19 @@ def percentifyList(imageList):
 
     return imageList
 
+def epoch_seconds(date):
+    td = date - epoch
+    return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
+
+def scoreDiff(ups, downs):
+    return ups - downs
 
 def weighLikes(ups, downs, date):
-    """Create a score that fairly derives from likes and dislikes."""
-    pass
-
+    s = scoreDiff(ups, downs)
+    order = log(max(abs(s), 1), 10)
+    sign = 1 if s > 0 else -1 if s < 0 else 0
+    seconds = epoch_seconds(date) - 1134028003
+    return round(sign * order + seconds / 45000, 7)
 
 def addHeuristic(imageList):
     """Add a heuristic key value pair into a list of dicts for images."""
