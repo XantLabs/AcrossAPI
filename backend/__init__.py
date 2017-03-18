@@ -172,11 +172,6 @@ def standard():
 @app.route('/api/upload', methods=["POST"])
 def upload():
     """Upload a file to the host. Return an error if it fails."""
-    # Check if the post request has the file part.
-    if 'file' not in request.files:
-        return "Forbidden: file part must be included in HTTP POST " + \
-            "request."
-
     file = request.files['img']
     caption = request.form['caption']
     language = request.form['language']
