@@ -117,7 +117,7 @@ def scoreDiff(ups, downs):
 def weighLikes(ups, downs, date):
     """Weigh likes and return likes score."""
     s = scoreDiff(ups, downs)
-    order = log(max(abs(s), 1), 10)
+    order = math.log(max(abs(s), 1), 10)
     sign = 1 if s > 0 else -1 if s < 0 else 0
     seconds = epoch_seconds(date) - 1134028003
     return round(sign * order + seconds / 45000, 7)
