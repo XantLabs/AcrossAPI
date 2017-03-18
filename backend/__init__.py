@@ -253,6 +253,8 @@ def upvote(filename):
     f.likes += 1
     db.session.commit()
 
+    return f.likes
+
 
 @app.route('/api/downvote/<filename>', methods=["POST"])
 def downvote(filename):
@@ -265,6 +267,8 @@ def downvote(filename):
     f = Photo.query.filter_by(fileName=filename).first()
     f.dislikes += 1
     db.session.commit()
+
+    return f.dislikes
 
 
 @app.errorhandler(403)
