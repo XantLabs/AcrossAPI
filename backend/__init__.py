@@ -30,7 +30,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = secure.DATABASE
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, use_native_unicode=False)
 
 # Models
 
