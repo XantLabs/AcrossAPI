@@ -253,8 +253,6 @@ def upvote(filename):
     f.likes += 1
     db.session.commit()
 
-    print(f.likes)
-
     return str(f.likes)
 
 
