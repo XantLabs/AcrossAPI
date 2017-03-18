@@ -2,6 +2,7 @@
 
 import views
 
+# Note that all will be POST requests.
 URLS = [
-    ('/', views.index),
+    ('/media/<filename>', views.uploadedFile),
 ]
