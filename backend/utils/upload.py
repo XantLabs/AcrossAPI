@@ -5,7 +5,7 @@ from datetime import datetime
 
 FILEHASH = hashlib.sha256()
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-APIKEY_FILE = open(os.path.join(os.pardir, "api.keys"), "w")
+APIKEY_FILE = "api.keys"
 
 print(APIKEY_FILE)
 
