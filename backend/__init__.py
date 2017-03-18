@@ -164,6 +164,10 @@ def getTopN(n, userLat, userLon):
 
 # Views
 
+@app.route('/')
+def standard():
+    return "Nothing to see here. Move along.", 403
+
 @app.route('/api/upload', methods=["POST"])
 def upload():
     """Upload a file to the host. Return an error if it fails."""
