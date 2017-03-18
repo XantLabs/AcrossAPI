@@ -167,6 +167,7 @@ def getTopN(n, userLat, userLon):
 
 @app.route('/')
 def standard():
+    """Test page."""
     return "Nothing to see here. Move along.", 403
 
 
@@ -190,9 +191,11 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], fn))
 
         # Upload renamed file to database.
-        newPhoto = Photo(uploadedTime=datetime.utcnow, caption=capt,
-                         language=lang, views=0, active=True, fileName=fn,
-                         lat=lat1, lon=lon1, likes=0, dislikes=0)
+        newPhoto = Photo(uploadedTime=datetime.utcnow,
+                         caption=capt.decode('utf-8'),
+                         language=lang, views=0, active=True,
+                         fileName=fn.decode('utf-8'), lat=lat1, lon=lon1,
+                         likes=0, dislikes=0)
 
         print(newPhoto)
 
