@@ -1,6 +1,8 @@
 """Libs for uploading to the server."""
 import hashlib
 import os
+import random
+import string
 from datetime import datetime
 
 FILEHASH = hashlib.sha256()
@@ -8,9 +10,14 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 APIKEY_FILE = "api.keys"
 
 
+def genRandomString():
+    """Generates a random string."""
+    return ''.join(random.choice(string.lowercase) for i in range(10))
+
+
 def hashFile(filename):
     """Hash a filename depending on filename and datetime."""
-    utcTime = str(datetime.utcnow())
+    utcTime = str(datetime.utcnow()) + genRandomString()
     inputStr = filename.split('.')[0] + utcTime
     FILEHASH.update(inputStr.encode())
 
