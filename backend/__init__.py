@@ -242,7 +242,7 @@ def sendTopPhotos():
 
 
 @app.route('/api/upvote/<filename>', methods=["POST"])
-def upvote():
+def upvote(filename):
     """Apply exactly one upvote for a photo."""
     apikey = request.form['apikey']
 
