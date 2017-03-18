@@ -7,6 +7,8 @@ FILEHASH = hashlib.sha256()
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 APIKEY_FILE = open(os.path.join(os.pardir, "api.keys"), "w")
 
+print(APIKEY_FILE)
+
 
 def hashFile(filename):
     """Hash a filename depending on filename and datetime."""
