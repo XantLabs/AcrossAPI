@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 from celery import Celery
 from celery.schedules import crontab
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
