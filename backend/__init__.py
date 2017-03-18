@@ -199,7 +199,7 @@ def upload():
         #                  lat=lat1, lon=lon1,
         #                  likes=0, dislikes=0)
 
-        newPhoto = Photo(uploadedTime=datetime.utcnow,
+        newPhoto = Photo(uploadedTime=datetime.utcnow(),
                          caption="test",
                          language="en-US",
                          views=0, active=True,
