@@ -7,8 +7,11 @@ Requirements do not include those included in `requirements.txt`.
 
 - python>=3.5.2
 - virtualenv
+- mysql
 
 ## Installation
+
+MySQL runs on localhost with the application. Use nginx to serve the app. It is assumed you know how to do this.
 
 After cloning the repository, run the following in a shell:
 
@@ -46,7 +49,7 @@ HTTP POST http://<SOME_IP>/api/upload
 You can request a list of n photo objects with:
 
 ```
-HTTP GET http://<SOME_IP>/api/photo_list
+HTTP POST http://<SOME_IP>/api/photo_list
 'n': Length of photo list,
 'apikey': App's api key,
 'userLat': User's latitude,

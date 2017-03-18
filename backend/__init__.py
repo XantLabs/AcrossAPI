@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 from celery import Celery
 from celery.schedules import crontab
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -167,6 +167,7 @@ def getTopN(n, userLat, userLon):
 @app.route('/')
 def standard():
     return "Nothing to see here. Move along.", 403
+
 
 @app.route('/api/upload', methods=["POST"])
 def upload():
