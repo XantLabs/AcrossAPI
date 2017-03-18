@@ -137,7 +137,7 @@ def addHeuristic(imageList):
 
         image['heuristic'] = min(100, total)
 
-    print(imageList)
+    print(unicode(imageList).encode('utf-8'))
 
     return imageList
 
