@@ -220,10 +220,10 @@ def sendTopPhotos():
         if int(n) < 1:
             raise ValueError
     except ValueError:
-        return "Error: n must be an int greater than 0.", 403
+        return "Error: n must be an int greater than 0."
 
     if not checkApiKey(apikey):
-        return "Forbidden: API key not in list.", 403
+        return "Forbidden: API key not in list."
 
     return getTopN(n, userLat, userLon)
 
@@ -234,7 +234,7 @@ def upvote():
     apikey = request.form['apikey']
 
     if not checkApiKey(apikey):
-        return "Forbidden: API key not in list.", 403
+        return "Forbidden: API key not in list."
 
     f = Photo.query.filter_by(fileName=filename).first()
     f.upvotes += 1
@@ -247,7 +247,7 @@ def downvote(filename):
     apikey = request.form['apikey']
 
     if not checkApiKey(apikey):
-        return "Forbidden: API key not in list.", 403
+        return "Forbidden: API key not in list."
 
     f = Photo.query.filter_by(fileName=filename).first()
     f.downvotes += 1
