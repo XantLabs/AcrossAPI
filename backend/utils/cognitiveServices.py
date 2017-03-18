@@ -1,5 +1,10 @@
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
+import datetime
+import time
+
+last_authTime = None
+auth = None
 
 # returns True if 'adult content' otherwise False.
 def isModerate(imageurl):
@@ -28,8 +33,8 @@ def isModerate(imageurl):
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
-#not yet implemented
-def captionTranslation():
+def getAuth():
+    global auth
     headers = {
         # Request headers
         'Ocp-Apim-Subscription-Key': 'ffe39cd4f6004341b4d1271a085abe99',
@@ -38,11 +43,43 @@ def captionTranslation():
         conn = http.client.HTTPSConnection('api.cognitive.microsoft.com')
         conn.request("POST", "/sts/v1.0/issueToken",'{body}' ,headers)
         response = conn.getresponse()
-        auth = response.read()
-        print (auth)
+        auth = str(response.read(), 'utf-8')
+        #auth = base64.b64encode(response.read())
+        return auth
+
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
-#for debugging
-print(isModerate('http://i.imgur.com/qEzKzk9.jpg'))
-captionTranslation()
+#returns string of translated caption
+def translate(caption, translateTo):
+
+    global last_authTime
+    global auth
+    if (last_authTime == None):
+        last_authTime = datetime.datetime.now()
+        auth = getAuth()
+    elif (datetime.datetime.now() - last_authTime).seconds > 550:
+        last_authTime = datetime.datetime.now()
+        auth = getAuth()
+
+    translate_packet = {
+      'text': caption,
+      'to': translateTo,
+      'from': 'en'
+    }
+
+    headers = {
+        # Request headers
+        'Authorization': 'Bearer '+auth,
+    }
+    try:
+        url = "/v2/http.svc/Translate?%s"
+        conn = http.client.HTTPSConnection('api.microsofttranslator.com')
+        conn.request("GET", url %urllib.parse.urlencode(translate_packet), '{body}', headers)
+        response = conn.getresponse()
+        data = str(response.read(), 'utf-8')
+        data = data.partition('>')[-1].rpartition('<')[0]
+        return data
+
+    except Exception as e:
+        print("[Errno {0}] {1}".format(e.errno, e.strerror))
