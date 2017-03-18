@@ -127,11 +127,12 @@ def weighLikes(ups, downs, date):
 
 def addHeuristic(imageList):
     """Add a heuristic key value pair into a list of dicts for images."""
-    total = LIKES_IMPORTANCE * int(imageList['uph']) + \
-        VIEWS_IMPORTANCE * int(imageList['viewh']) + \
-        DISTANCE_IMPORTANCE * int(imageList['disth'])
+    for image in imageList:
+        total = LIKES_IMPORTANCE * int(image['uph']) + \
+            VIEWS_IMPORTANCE * int(image['viewh']) + \
+            DISTANCE_IMPORTANCE * int(image['disth'])
 
-    imageList['score'] = total
+        image['heuristic'] = total
 
     return imageList
 
