@@ -1,7 +1,7 @@
 # Project defined ignores
 media/*
 !media/.gitkeep
-secret.py
+secure.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
