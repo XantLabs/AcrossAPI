@@ -42,7 +42,7 @@ def percentifyList(imageList):
     return imageList
 
 
-def weighLikes(likes, dislikes):
+def weighLikes(ups, downs, date):
     """Create a score that fairly derives from likes and dislikes."""
     pass
 
