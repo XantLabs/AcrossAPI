@@ -63,6 +63,14 @@ HTTP POST http://<SOME_IP>/api/[up/down]vote/<filename>,
 'apikey': App's api key,
 ```
 
+You can get translation strings with:
+
+```
+HTTP POST http://<SOME_IP>/api/translate
+'apikey': App's api key,
+'filename': File name of image. Caption will be looked up.
+```
+
 Finally, you can get an image directly from below. Note that you do not need an API key for this operation. Rate limiting still applies.
 
 ```

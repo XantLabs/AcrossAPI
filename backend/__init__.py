@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import secure
+import cognitiveServices as cs
 from utils.generalutils import urlify
 from utils.upload import *
 
@@ -224,6 +225,22 @@ def upload():
 
     return "Forbidden: ensure the file extension is allowed and API key " + \
         "is correct."
+
+
+@app.route('/api/translate', methods=["POST"])
+def trans():
+    """Translate a caption from one language to another."""
+    apikey = request.form['apikey']
+    filename = request.form['filename']
+
+    if not checkApiKey(apikey):
+        return "Forbidden: API key not in list."
+
+    f = Photo.query.filter_by(fileName=filename).first()
+    languageFrom = f.language
+    caption = f.caption
+
+    return cs.translate(caption, languageFrom, 'en')
 
 
 @app.route('/api/media/<filename>', methods=["GET"])
