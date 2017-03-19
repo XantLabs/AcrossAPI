@@ -153,6 +153,8 @@ def getTopN(n, userLat, userLon):
         image['views'] = row.views
         image['url'] = row.fileName
         image['caption'] = row.caption
+        image['likes'] = row.likes
+        image['dislikes'] = row.dislikes
         image['distance'] = getDistance(float(userLat), float(userLon),
                                         float(row.lat),
                                         float(row.lon))
