@@ -123,7 +123,7 @@ def scoreDiff(ups, downs):
 
 def weighLikes(ups, downs):
     """Weigh likes and return likes score."""
-    s = score(ups, downs)
+    s = scoreDiff(ups, downs)
     order = math.log(max(abs(s), 1), 10)
     sign = 1 if s > 0 else -1 if s < 0 else 0
 
