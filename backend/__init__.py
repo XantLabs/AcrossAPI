@@ -88,18 +88,18 @@ def percentifyList(imageList):
     # e.g.: [{url, likesHeuristic, distanceInKm, views, ...}]
     #   to: [{url, likesPercentage, distancePercentage, viewsPercentage}, ...]
 
-    likeScoreSum = 0
-    distanceSum = 0
-    viewsSum = 0
+    maxLikeScore = 0
+    maxDist = 0
+    maxViews = 0
     for i in imageList:
-        likeScoreSum += i['likeScore']
-        viewsSum += int(i['views'])
-        distanceSum += i['distance']
+        maxLikeScore = i['likeScore'] if maxLikeScore < i['likeScore']
+        maxViews += int(i['views']) if maxLikeScore < i['views']
+        maxDist += i['distance'] if maxLikeScore < i['distance']
 
     for i in imageList:
-        i['uph'] = min(100 * (i['likeScore'] / likeScoreSum), 100)
-        i['viewh'] = min(100, 100 * (1.0 - (int(i['views']) / viewsSum)))
-        i['disth'] = min(100, 100 * (i['distance'] / distanceSum))
+        i['uph'] = min(100 * (i['likeScore'] / maxLikeScore), 100)
+        i['viewh'] = min(100, 100 * (1.0 - (int(i['views']) / maxViews)))
+        i['disth'] = min(100, 100 * (i['distance'] / maxDist))
 
     return imageList
 
