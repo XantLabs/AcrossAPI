@@ -1,4 +1,5 @@
-"""Main init file. File does not need to be edited except for server edits."""
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import secure
 from utils.generalutils import urlify
