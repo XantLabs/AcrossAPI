@@ -137,8 +137,6 @@ def addHeuristic(imageList):
 
         image['heuristic'] = min(100, total)
 
-    print(imageList)
-
     return imageList
 
 
