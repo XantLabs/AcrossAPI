@@ -63,8 +63,8 @@ class Photo(db.Model):
 # Functions
 
 # Weighting for heuristic. Should add to 1.0
-DISTANCE_IMPORTANCE = 0.58
-LIKES_IMPORTANCE = 0.17
+DISTANCE_IMPORTANCE = 0.45
+LIKES_IMPORTANCE = 0.35
 VIEWS_IMPORTANCE = 0.25
 
 epoch = datetime(1970, 1, 1)
@@ -123,8 +123,11 @@ def scoreDiff(ups, downs):
 
 def weighLikes(ups, downs):
     """Weigh likes and return likes score."""
-    # Temporary hack: just return upvotes/total.
-    return 1.0 * ups / max(1, ups + downs)
+    s = score(ups, downs)
+    order = log(max(abs(s), 1), 10)
+    sign = 1 if s > 0 else -1 if s < 0 else 0
+
+    return round(sign * order, 7)
 
 
 def addHeuristic(imageList):
