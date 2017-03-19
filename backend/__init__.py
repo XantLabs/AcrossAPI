@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import secure
-import cognitiveServices as cs
+import utils.cognitiveServices as cs
 from utils.generalutils import urlify
 from utils.upload import *
 
