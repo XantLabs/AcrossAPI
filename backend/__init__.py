@@ -63,8 +63,8 @@ class Photo(db.Model):
 # Functions
 
 # Weighting for heuristic. Should add to 1.0
-DISTANCE_IMPORTANCE = 0.50
-LIKES_IMPORTANCE = 0.27
+DISTANCE_IMPORTANCE = 0.54
+LIKES_IMPORTANCE = 0.23
 VIEWS_IMPORTANCE = 0.23
 
 epoch = datetime(1970, 1, 1)
@@ -90,9 +90,9 @@ def percentifyList(imageList):
     # e.g.: [{url, likesHeuristic, distanceInKm, views, ...}]
     #   to: [{url, likesPercentage, distancePercentage, viewsPercentage}, ...]
 
-    maxLikeScore = 0
-    maxDist = 0
-    maxViews = 0
+    maxLikeScore = 1
+    maxDist = 1
+    maxViews = 1
     for i in imageList:
         if maxLikeScore < i['likeScore']:
             maxLikeScore = i['likeScore']
