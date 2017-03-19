@@ -120,14 +120,10 @@ def scoreDiff(ups, downs):
     return ups - downs
 
 
-def weighLikes(ups, downs, date):
+def weighLikes(ups, downs):
     """Weigh likes and return likes score."""
-    s = scoreDiff(ups, downs)
-    order = math.log(max(abs(s), 1), 10)
-    sign = 1 if s > 0 else -1 if s < 0 else 0
-    seconds = epoch_seconds(date) - 1134028003
-
-    return round(sign * order + seconds / 45000, 7)
+    # Temporary hack: just return upvotes/total.
+    return 1.0 * ups / (ups + downs)
 
 
 def addHeuristic(imageList):
@@ -160,12 +156,11 @@ def getTopN(n, userLat, userLon):
         image['distance'] = getDistance(float(userLat), float(userLon),
                                         float(row.lat),
                                         float(row.lon))
-        image['likeScore'] = weighLikes(row.likes, row.dislikes,
-                                        row.uploadedTime)
+        image['likeScore'] = weighLikes(row.likes, row.dislikes)
         imageList.append(image)
 
         # Also, change views += 1.
-        row.views += 1
+        row.views = row.views + 1
         db.session.commit()
 
     # Put the image list through all functions until end heuristic is found.
