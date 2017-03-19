@@ -92,9 +92,12 @@ def percentifyList(imageList):
     maxDist = 0
     maxViews = 0
     for i in imageList:
-        maxLikeScore = i['likeScore'] if maxLikeScore < i['likeScore']
-        maxViews += int(i['views']) if maxLikeScore < i['views']
-        maxDist += i['distance'] if maxLikeScore < i['distance']
+        if maxLikeScore < i['likeScore']:
+            maxLikeScore = i['likeScore']
+        if maxLikeScore < i['views']:
+            maxViews += int(i['views'])
+        if maxLikeScore < i['distance']:
+            maxDist += i['distance']
 
     for i in imageList:
         i['uph'] = min(100 * (i['likeScore'] / maxLikeScore), 100)
