@@ -123,7 +123,7 @@ def scoreDiff(ups, downs):
 def weighLikes(ups, downs):
     """Weigh likes and return likes score."""
     # Temporary hack: just return upvotes/total.
-    return 1.0 * ups / (ups + downs)
+    return 1.0 * ups / max(1, ups + downs)
 
 
 def addHeuristic(imageList):
