@@ -63,9 +63,9 @@ class Photo(db.Model):
 # Functions
 
 # Weighting for heuristic. Should add to 1.0
-DISTANCE_IMPORTANCE = 0.54
-LIKES_IMPORTANCE = 0.23
-VIEWS_IMPORTANCE = 0.23
+DISTANCE_IMPORTANCE = 0.40
+LIKES_IMPORTANCE = 0.28
+VIEWS_IMPORTANCE = 0.32
 
 epoch = datetime(1970, 1, 1)
 
