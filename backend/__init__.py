@@ -62,9 +62,9 @@ class Photo(db.Model):
 # Functions
 
 # Weighting for heuristic. Should add to 1.0
-DISTANCE_IMPORTANCE = 0.2
-LIKES_IMPORTANCE = 0.45
-VIEWS_IMPORTANCE = 0.35
+DISTANCE_IMPORTANCE = 0.30
+LIKES_IMPORTANCE = 0.20
+VIEWS_IMPORTANCE = 0.50
 
 epoch = datetime(1970, 1, 1)
 
@@ -217,7 +217,7 @@ def upload():
                          views=0, active=True,
                          fileName=fn,
                          lat=lat1, lon=lon1,
-                         likes=0, dislikes=0)
+                         likes=1, dislikes=1)
 
         db.session.add(newPhoto)
         db.session.commit()
